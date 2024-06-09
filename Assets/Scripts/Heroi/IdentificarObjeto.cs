@@ -63,7 +63,16 @@ public class IdentificarObjeto : MonoBehaviour
                     textoMsg.color = textoTecla.color;
                     textoTecla.text = "[F]";
                     textoMsg.text = "Pegar";
+                }
+                if (hit.transform.gameObject.tag == "Tocar")
+                {
+                    objPegar = hit.transform.gameObject;
+                    objAlvo = objPegar;
 
+                    textoTecla.color = new Color(51 / 255f, 1, 0);
+                    textoMsg.color = textoTecla.color;
+                    textoTecla.text = "[F]";
+                    textoMsg.text = "Tocar";
                 }
                 if (objAlvo != null)
                 {
