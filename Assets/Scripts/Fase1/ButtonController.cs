@@ -1,27 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class ButtonController : MonoBehaviour
 {
+
+    public Text score;
+    public int totalButtons;
+    public int foundButtons = 0;
+
+    private FindableButton[] buttons;
+
     void Start()
     {
         UpdateFindableObject();
+        totalButtons = buttons.Length;
     }
 
-    // Update is called once per frame
     void Update()
     {
+    
+    }
 
+    public void updateScore()
+    {
+        string text = $"Encontrados: {foundButtons}/{totalButtons}";
+        Debug.Log(text);
+        score.text = text;
     }
 
     public void UpdateFindableObject()
     {
         {
-            // Find all active instances of the script YourScriptName
-            FindableButton[] buttons = FindObjectsOfType<FindableButton>();
+            buttons = FindObjectsOfType<FindableButton>();
 
-            // Loop through the array and do something with each object
+            updateScore();
+
             foreach (FindableButton button in buttons)
             {
                 if (!button.wasFound) {
