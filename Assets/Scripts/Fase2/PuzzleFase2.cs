@@ -16,9 +16,18 @@ public class PuzzleFase2 : MonoBehaviour
 
     AudioSource src;
 
+    bool onGoing = false;
+
     void Start()
     {
-        src = GetComponent<AudioSource>();
+       src = GetComponent<AudioSource>();
+    }
+
+    public void StartGame()
+    {
+        if (onGoing) { return; }
+
+        onGoing = true;
         ResetPhase();
     }
 
@@ -67,6 +76,7 @@ public class PuzzleFase2 : MonoBehaviour
 
     internal void clipPlayed(AudioClip clip)
     {
+        if (!this.onGoing) { return; }
         StartCoroutine(HandleClipPlayed(clip));
     }
 
