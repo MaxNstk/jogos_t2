@@ -8,26 +8,41 @@ public class PuzzleFase2 : MonoBehaviour
     public List<AudioClip> clips;
     public AudioClip errorClip;
     public AudioClip nextStageClip;
-    public List<int> clipSequence = new List<int> { 0, 3, 0, 1, 2, 2, 1, 0, 2, 3 };
-    public List<int> currentPlayerSequence = new List<int> { };
+    public List<int> clipSequence;
+    public List<int> currentPlayerSequence;
+
     public int currentPhase = 1;
+    public int phasesAmount = 10;
 
     AudioSource src;
 
     void Start()
     {
         src = GetComponent<AudioSource>();
-        StartCoroutine(PlayCurrentPhaseSequence());
+        ResetPhase();
+    }
+
+    void CreateNewClipSequence()
+    {
+        this.clipSequence = new List<int>();
+        for (int i = 0; i < this.phasesAmount; i++)
+        {
+            int randomNumber = UnityEngine.Random.Range(0, clips.Count);
+            Debug.Log($"Novo indice: {randomNumber}");
+            clipSequence.Add(randomNumber);
+        }
     }
 
     IEnumerator PlayCurrentPhaseSequence()
     {
+        // plays the number of clips depending on the player phase
         for (int idx = 0; idx < this.currentPhase; idx++)
         {
             int clipIndex = clipSequence[idx];
-            src.clip = clips[clipIndex];
-            src.Play();
-            yield return new WaitForSeconds(src.clip.length);
+            Debug.Log($"clipIndex: {clipIndex}");
+            AudioClip clip = clips[clipIndex];
+            yield return StartCoroutine(PlayClip(clip));
+            yield return new WaitForSeconds(clip.length);
         }
     }
 
@@ -38,14 +53,16 @@ public class PuzzleFase2 : MonoBehaviour
 
     public bool ClipIsRight()
     {
-        // Checa se o clip adicionado é o correto
+        // verifica a lista correta e o input de usuário
         return currentPlayerSequence[currentPlayerSequence.Count - 1] == clipSequence[currentPlayerSequence.Count - 1];
     }
 
     public void ResetPhase()
     {
         this.currentPhase = 1;
-        this.currentPlayerSequence = new List<int> { };
+        this.currentPlayerSequence = new List<int> {};
+        CreateNewClipSequence();
+        StartCoroutine(PlayCurrentPhaseSequence());
     }
 
     internal void clipPlayed(AudioClip clip)
@@ -55,16 +72,14 @@ public class PuzzleFase2 : MonoBehaviour
 
     IEnumerator HandleClipPlayed(AudioClip clip)
     {
+        // toca o clip e adiciona a lista de tocados
         yield return StartCoroutine(PlayClip(clip));
-
         int playedIdx = GetClipIndex(clip);
         currentPlayerSequence.Add(playedIdx);
 
-        // verifica o clip
+        // verifica se o é o correto clip, se não, restarta a fase
         if (!ClipIsRight())
         {
-            yield return StartCoroutine(WaitSeconds(1));
-            Debug.Log($"Clip is wrong");
             yield return StartCoroutine(PlayClip(errorClip));
             ResetPhase();
             yield break;
@@ -76,7 +91,7 @@ public class PuzzleFase2 : MonoBehaviour
             yield return StartCoroutine(WaitSeconds(1));
             yield return StartCoroutine(PlayClip(nextStageClip));
             this.currentPhase++;
-            this.currentPlayerSequence = new List<int> { };
+            this.currentPlayerSequence = new List<int> {};
             yield return StartCoroutine(WaitSeconds(1));
             yield return StartCoroutine(PlayCurrentPhaseSequence());
         }
@@ -84,7 +99,6 @@ public class PuzzleFase2 : MonoBehaviour
 
     IEnumerator PlayClip(AudioClip clip)
     {
-        Debug.Log("Playing a clip right now");
         src.PlayOneShot(clip);
         yield return new WaitForSeconds(clip.length);
     }

@@ -6,8 +6,14 @@ public class BotaoSonoro : MonoBehaviour, IPegavel
 {
     public AudioClip clip;
 
+    public bool startsGame = true;
+
     public void Pegar()
     {
+        if (!startsGame) {
+            GetComponent<AudioSource>().PlayOneShot(this.clip);
+            return; 
+        }
         PuzzleFase2 controller = FindObjectOfType<PuzzleFase2>();
         controller.clipPlayed(clip);
     }
