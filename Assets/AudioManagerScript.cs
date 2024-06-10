@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class AudioManagerScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    AudioSource src;
+
     void Start()
     {
-        
+        this.src = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+
+    IEnumerator PlayClip(AudioClip clip)
+    {
+        src.PlayOneShot(clip);
+        yield return new WaitForSeconds(clip.length);
+    }
+
+    IEnumerator WaitSeconds(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+    }
+
 }

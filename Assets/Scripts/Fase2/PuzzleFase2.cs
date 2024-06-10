@@ -26,7 +26,6 @@ public class PuzzleFase2 : MonoBehaviour
     public void StartGame()
     {
         if (onGoing) { return; }
-
         onGoing = true;
         ResetPhase();
     }
@@ -37,7 +36,6 @@ public class PuzzleFase2 : MonoBehaviour
         for (int i = 0; i < this.phasesAmount; i++)
         {
             int randomNumber = UnityEngine.Random.Range(0, clips.Count);
-            Debug.Log($"Novo indice: {randomNumber}");
             clipSequence.Add(randomNumber);
         }
     }
@@ -48,7 +46,6 @@ public class PuzzleFase2 : MonoBehaviour
         for (int idx = 0; idx < this.currentPhase; idx++)
         {
             int clipIndex = clipSequence[idx];
-            Debug.Log($"clipIndex: {clipIndex}");
             AudioClip clip = clips[clipIndex];
             yield return StartCoroutine(PlayClip(clip));
             yield return new WaitForSeconds(clip.length);
