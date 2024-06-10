@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BotaoSonoro : MonoBehaviour, IPegavel
 {
+    public AudioClip clip;
+
     public void Pegar()
     {
-        AudioSource src = GetComponent<AudioSource>();
-        src.Play();
         PuzzleFase2 controller = FindObjectOfType<PuzzleFase2>();
-        controller.clipPlayed(src.clip);
+        controller.clipPlayed(clip);
     }
 
     // Start is called before the first frame update
