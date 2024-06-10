@@ -6,7 +6,10 @@ public class BotaoSonoro : MonoBehaviour, IPegavel
 {
     public void Pegar()
     {
-        GetComponent<AudioSource>().Play();
+        AudioSource src = GetComponent<AudioSource>();
+        src.Play();
+        PuzzleFase2 controller = FindObjectOfType<PuzzleFase2>();
+        controller.clipPlayed(src.clip);
     }
 
     // Start is called before the first frame update
