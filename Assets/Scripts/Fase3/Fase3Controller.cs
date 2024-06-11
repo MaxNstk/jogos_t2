@@ -28,6 +28,7 @@ public class Fase3Controller : MonoBehaviour
     public void StartGame()
     {
         if (onGoing) { return; }
+        currentPlayerSequence = new List<AudioClip>() {};
         onGoing = true;
     }
 
@@ -44,10 +45,10 @@ public class Fase3Controller : MonoBehaviour
         }else {
             currentPlayerSequence.Add(clip);
 
-            // se estiver errado reseta
-            if (!ClipIsRight())
+            if (!ClipIsRight()) // se estiver errado remove
             {
                 yield return StartCoroutine(PlayClip(errorClip));
+                currentPlayerSequence.RemoveAt(currentPlayerSequence.Count-1);
                 errorCount++;
             }
             else // Está certo
@@ -58,6 +59,7 @@ public class Fase3Controller : MonoBehaviour
                 if (currentPlayerSequence.Count == clipSequence.Count)
                 {
                     Debug.Log("Parabéns acertasse tudo");
+                    onGoing = false;
                 }
             }
         }
