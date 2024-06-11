@@ -6,9 +6,14 @@ public class AudioManagerScript : MonoBehaviour
 {
     AudioSource src;
 
+    public AudioClip successClip;
+    public AudioClip failClip;
+    public AudioClip unlockDoorClip;
+
+
     void Start()
     {
-        this.src = GetComponent<AudioSource>();
+        src = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -16,15 +21,15 @@ public class AudioManagerScript : MonoBehaviour
         
     }
 
-    IEnumerator PlayClip(AudioClip clip)
+    public IEnumerator PlayClipWaiting(AudioClip clip)
     {
         src.PlayOneShot(clip);
         yield return new WaitForSeconds(clip.length);
     }
 
-    IEnumerator WaitSeconds(int seconds)
+    public void PlayClip(AudioClip clip)
     {
-        yield return new WaitForSeconds(seconds);
+        src.PlayOneShot(clip);
     }
 
 }

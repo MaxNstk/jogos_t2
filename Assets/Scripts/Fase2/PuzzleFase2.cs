@@ -1,12 +1,13 @@
+using SunTemple;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PuzzleFase2 : MonoBehaviour
 {
     public List<AudioClip> clips;
-    public AudioClip errorClip;
     public AudioClip nextStageClip;
     public List<int> clipSequence;
     public List<int> currentPlayerSequence;
@@ -14,18 +15,22 @@ public class PuzzleFase2 : MonoBehaviour
     public int currentPhase = 1;
     public int phasesAmount = 10;
 
-    AudioSource src;
+    AudioManagerScript am;
 
     bool onGoing = false;
+    bool gameEnd = false;
+
+    public GameObject endPhaseDoor;
+
 
     void Start()
     {
-       src = GetComponent<AudioSource>();
+       am = FindObjectOfType<AudioManagerScript>();
     }
 
     public void StartGame()
     {
-        if (onGoing) { return; }
+        if (onGoing || gameEnd) { return; }
         onGoing = true;
         ResetPhase();
     }
@@ -47,7 +52,7 @@ public class PuzzleFase2 : MonoBehaviour
         {
             int clipIndex = clipSequence[idx];
             AudioClip clip = clips[clipIndex];
-            yield return StartCoroutine(PlayClip(clip));
+            yield return StartCoroutine(am.PlayClipWaiting(clip));
             yield return new WaitForSeconds(clip.length);
         }
     }
@@ -80,14 +85,14 @@ public class PuzzleFase2 : MonoBehaviour
     IEnumerator HandleClipPlayed(AudioClip clip)
     {
         // toca o clip e adiciona a lista de tocados
-        yield return StartCoroutine(PlayClip(clip));
+        yield return StartCoroutine(am.PlayClipWaiting(clip));
         int playedIdx = GetClipIndex(clip);
         currentPlayerSequence.Add(playedIdx);
 
         // verifica se o é o correto clip, se não, restarta a fase
         if (!ClipIsRight())
         {
-            yield return StartCoroutine(PlayClip(errorClip));
+            yield return StartCoroutine(am.PlayClipWaiting(am.failClip));
             ResetPhase();
             yield break;
         }
@@ -95,19 +100,28 @@ public class PuzzleFase2 : MonoBehaviour
         // verifica se acabou a sequencia
         if (currentPlayerSequence.Count == this.currentPhase)
         {
+            if (this.currentPhase == this.phasesAmount)
+            {
+                EndGame();
+                yield break;
+            }
             yield return StartCoroutine(WaitSeconds(1));
-            yield return StartCoroutine(PlayClip(nextStageClip));
-            this.currentPhase++;
+            yield return StartCoroutine(am.PlayClipWaiting(nextStageClip));
+            this.currentPhase++;            
             this.currentPlayerSequence = new List<int> {};
             yield return StartCoroutine(WaitSeconds(1));
             yield return StartCoroutine(PlayCurrentPhaseSequence());
         }
     }
 
-    IEnumerator PlayClip(AudioClip clip)
+    void EndGame()
     {
-        src.PlayOneShot(clip);
-        yield return new WaitForSeconds(clip.length);
+        endPhaseDoor.GetComponent<Door>().Destrancar();
+        AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
+        am.PlayClip(am.successClip);
+        this.onGoing = false;
+        gameEnd = true;
+
     }
 
     IEnumerator WaitSeconds(int seconds)

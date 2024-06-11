@@ -1,13 +1,16 @@
+using SunTemple;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-public class ButtonController : MonoBehaviour
+public class PuzzleFase1 : MonoBehaviour
 {
 
     public Text score;
     public int totalButtons;
     public int foundButtons = 0;
+
+    public GameObject portaAbrir; 
 
     private FindableButton[] buttons;
 
@@ -43,7 +46,10 @@ public class ButtonController : MonoBehaviour
                     return;
                 }
             }
-            Debug.Log("TODO ABRIR PORTA. Acabaram-se todos botões");
+            portaAbrir.GetComponent<Door>().Destrancar();
+            AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
+            am.PlayClip(am.successClip);
+
         }
 
 

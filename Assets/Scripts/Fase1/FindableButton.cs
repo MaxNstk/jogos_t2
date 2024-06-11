@@ -11,7 +11,7 @@ public class FindableButton : MonoBehaviour, IPegavel
     {
         Debug.Log("Peguei mais um");
         this.wasFound = true;
-        ButtonController controller = FindObjectOfType<ButtonController>();
+        PuzzleFase1 controller = FindObjectOfType<PuzzleFase1>();
         controller.foundButtons++;
         controller.UpdateFindableObject();
         Destroy(gameObject); 

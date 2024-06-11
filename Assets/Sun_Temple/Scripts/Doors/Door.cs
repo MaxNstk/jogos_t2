@@ -33,10 +33,10 @@ namespace SunTemple
 
 		public void Destrancar()
 		{
-			TerrenoController tc = FindObjectOfType<TerrenoController>();
-            tc.TocarSomAdicional(tc.portaDestrancar);
+            AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
+            am.PlayClip(am.unlockDoorClip);
             this.IsLocked = false;
-			GetComponent<Outline>().OutlineWidth = 2f;
+			GetComponent<Outline>().OutlineWidth = 3f;
 		}
 
         void Start(){
