@@ -6,6 +6,7 @@ public class ObjetoSelecionavelF3 : MonoBehaviour, IPegavel
 {
     public AudioClip clip;
 
+
     public void Pegar()
     {
         Fase3Controller controller = FindObjectOfType<Fase3Controller>();

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PuzzleFase2 : MonoBehaviour
 {
@@ -26,6 +27,12 @@ public class PuzzleFase2 : MonoBehaviour
     void Start()
     {
        am = FindObjectOfType<AudioManagerScript>();
+    }
+
+    void updateScore()
+    {
+        string text = $"Etapa: {currentPhase}/{phasesAmount}";
+        GameObject.Find("Pontuacao").GetComponent<Text>().text = text;
     }
 
     public void StartGame()
@@ -73,6 +80,7 @@ public class PuzzleFase2 : MonoBehaviour
         this.currentPhase = 1;
         this.currentPlayerSequence = new List<int> {};
         CreateNewClipSequence();
+        updateScore();
         StartCoroutine(PlayCurrentPhaseSequence());
     }
 
@@ -107,7 +115,8 @@ public class PuzzleFase2 : MonoBehaviour
             }
             yield return StartCoroutine(WaitSeconds(1));
             yield return StartCoroutine(am.PlayClipWaiting(nextStageClip));
-            this.currentPhase++;            
+            this.currentPhase++;
+            updateScore();
             this.currentPlayerSequence = new List<int> {};
             yield return StartCoroutine(WaitSeconds(1));
             yield return StartCoroutine(PlayCurrentPhaseSequence());

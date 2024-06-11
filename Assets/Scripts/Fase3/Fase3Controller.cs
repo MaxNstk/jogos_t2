@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Fase3Controller : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class Fase3Controller : MonoBehaviour
 
 
     AudioManagerScript am;
-
 
     int errorCount = 0;
     int errorLimit = 3;
@@ -33,6 +33,8 @@ public class Fase3Controller : MonoBehaviour
         if (onGoing) { return; }
         currentPlayerSequence = new List<AudioClip>() {};
         onGoing = true;
+        updateScore();
+
     }
 
     internal void clipPlayed(AudioClip clip)
@@ -67,7 +69,14 @@ public class Fase3Controller : MonoBehaviour
                     EndGame();
                 }
             }
+            updateScore();
         }
+    }
+
+    void updateScore()
+    {
+        string text = $"Ordenados: {currentPlayerSequence.Count}/{clipSequence.Count}";
+        GameObject.Find("Pontuacao").GetComponent<Text>().text = text;
     }
 
     private void EndGame()
