@@ -23,7 +23,8 @@ public class AudioManagerScript : MonoBehaviour
 
     public IEnumerator PlayClipWaiting(AudioClip clip)
     {
-        src.PlayOneShot(clip);
+        src.clip = clip;
+        src.Play();
         yield return new WaitForSeconds(clip.length);
     }
 

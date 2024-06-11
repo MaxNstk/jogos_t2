@@ -1,18 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Fase3Controller : MonoBehaviour
 {
-    public AudioClip errorClip;
     public AudioClip succesClip;
 
     public List<AudioClip> clipSequence;
     public List<AudioClip> currentPlayerSequence;
 
-    AudioSource src;
+
+    AudioManagerScript am;
+
 
     int errorCount = 0;
+    int errorLimit = 3;
 
     bool onGoing = false;
 
@@ -22,7 +25,7 @@ public class Fase3Controller : MonoBehaviour
 
     void Start()
     {
-        src = GetComponent<AudioSource>();
+        am = FindObjectOfType<AudioManagerScript>();
     }
 
     public void StartGame()
@@ -41,28 +44,42 @@ public class Fase3Controller : MonoBehaviour
     {
         if (!onGoing)
         {
-            yield return StartCoroutine(PlayClip(clip));
+            yield return StartCoroutine(am.PlayClipWaiting(clip));
         }else {
             currentPlayerSequence.Add(clip);
 
             if (!ClipIsRight()) // se estiver errado remove
             {
-                yield return StartCoroutine(PlayClip(errorClip));
+                yield return StartCoroutine(am.PlayClipWaiting(am.failClip));
                 currentPlayerSequence.RemoveAt(currentPlayerSequence.Count-1);
                 errorCount++;
+                if (errorCount == errorLimit) {
+                    GoToCheckPoint();
+                }
             }
             else // Está certo
             {
-                yield return StartCoroutine(PlayClip(succesClip));
+                yield return StartCoroutine(am.PlayClipWaiting(succesClip));
 
                 // Fechou o game
                 if (currentPlayerSequence.Count == clipSequence.Count)
                 {
-                    Debug.Log("Parabéns acertasse tudo");
-                    onGoing = false;
+                    EndGame();
                 }
             }
         }
+    }
+
+    private void EndGame()
+    {
+        am.PlayClipWaiting(succesClip);
+        Debug.Log("Parabéns acertasse tudo");
+        onGoing = false;
+    }
+
+    private void GoToCheckPoint()
+    {
+        Debug.Log("Voltar para o checkpoint");
     }
 
     public bool ClipIsRight()
@@ -70,19 +87,5 @@ public class Fase3Controller : MonoBehaviour
         // verifica a lista correta e o input de usuário
         return currentPlayerSequence[currentPlayerSequence.Count - 1] == clipSequence[currentPlayerSequence.Count - 1];
     }
-
-    IEnumerator PlayClip(AudioClip clip)
-    {
-        src.clip = clip;
-        src.Play();
-        yield return new WaitForSeconds(clip.length);
-    }
-
-    IEnumerator WaitSeconds(int seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-    }
-
-
 
 }

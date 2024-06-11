@@ -3887,7 +3887,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 337ef6a1a4481214e8ef37e40053e006, type: 3}
   - {fileID: 8300000, guid: e7208f115bf6dab4d98570afc87aa187, type: 3}
   - {fileID: 8300000, guid: 7c96495c97ca5e8459092da7bee10c01, type: 3}
-  nextStageClip: {fileID: 8300000, guid: dc60c2c6b49cf1e46b43d3e2f8a7c7b1, type: 3}
+  nextStageClip: {fileID: 8300000, guid: 87e45936c9a49cd4d8aea47121a005c8, type: 3}
   clipSequence: 00000000030000000000000001000000020000000200000001000000000000000200000003000000
   currentPlayerSequence: 
   currentPhase: 1
@@ -4001,8 +4001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42d93dfc2ba6284bbccc7b42d8de3f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  errorClip: {fileID: 8300000, guid: 3a00eaeecad312b4d8044746b41d03f6, type: 3}
-  succesClip: {fileID: 8300000, guid: 4122293bbb2f4944eaabc1e7a4ec6621, type: 3}
+  succesClip: {fileID: 8300000, guid: 87e45936c9a49cd4d8aea47121a005c8, type: 3}
   clipSequence:
   - {fileID: 8300000, guid: 8b1b26e145b946743bda25b867ab21f7, type: 3}
   - {fileID: 8300000, guid: f243fa2994ae40e46aafd7aeb55ddeb0, type: 3}
