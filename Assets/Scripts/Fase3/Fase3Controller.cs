@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,8 +34,8 @@ public class Fase3Controller : MonoBehaviour
         if (onGoing) { return; }
         currentPlayerSequence = new List<AudioClip>() {};
         onGoing = true;
+        am.Stop();
         updateScore();
-
     }
 
     internal void clipPlayed(AudioClip clip)
@@ -48,6 +49,9 @@ public class Fase3Controller : MonoBehaviour
         {
             yield return StartCoroutine(am.PlayClipWaiting(clip));
         }else {
+            if (am.IsPlaying()) { 
+                yield break; 
+            }
             currentPlayerSequence.Add(clip);
 
             if (!ClipIsRight()) // se estiver errado remove
