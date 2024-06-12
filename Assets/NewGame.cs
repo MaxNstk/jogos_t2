@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.EventSystems.StandaloneInputModule;
 
-public class NewGame : MonoBehaviour
+
+public class NewGame : MonoBehaviour, IDataPersistence
 {
+
+    private string playerName; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +25,21 @@ public class NewGame : MonoBehaviour
     
     public void StartNewGame()
     {
-        string name = GameObject.Find("TextoNome").GetComponent<Text>().text;
-        Debug.Log("Nome do camarada: "+name);
+        playerName = GameObject.Find("TextoNome").GetComponent<Text>().text;
+        Debug.Log("Nome do camarada: "+ playerName);
         DataPersistanceManager.instance.NewGame();
 
         // TODO SALVAR
         SceneManager.LoadScene(4);
+    }
+
+    public void LoadData(GameData data)
+    {
+        //
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.currentPlayerName = playerName;
     }
 }
