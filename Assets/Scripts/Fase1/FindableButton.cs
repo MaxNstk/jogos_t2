@@ -9,7 +9,6 @@ public class FindableButton : MonoBehaviour, IPegavel
     public bool wasFound = false;
     public void Pegar()
     {
-        Debug.Log("Peguei mais um");
         this.wasFound = true;
         PuzzleFase1 controller = FindObjectOfType<PuzzleFase1>();
         controller.foundButtons++;

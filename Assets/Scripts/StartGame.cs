@@ -10,6 +10,16 @@ public class StartGame : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void CarregarJogo()
+    {
+        // TODO carregar save
+    }
+
+    public void Ranking()
+    {
+        // TODO RANKING
+    }
+
     public void SairJogo()
     {
         Application.Quit();
