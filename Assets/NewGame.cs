@@ -23,6 +23,8 @@ public class NewGame : MonoBehaviour
     {
         string name = GameObject.Find("TextoNome").GetComponent<Text>().text;
         Debug.Log("Nome do camarada: "+name);
+        DataPersistanceManager.instance.NewGame();
+
         // TODO SALVAR
         SceneManager.LoadScene(4);
     }

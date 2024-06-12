@@ -6,12 +6,12 @@ using UnityEngine;
 public class DataPersistanceManager : MonoBehaviour
 {
 
-    private GameData gameDAta;
-    public static DataPersistanceManager Instance {  get; private set; }
+    private GameData gameData;
+    public static DataPersistanceManager instance {  get; private set; }
 
     private void Awake()
     {
-        Instance = this; 
+        instance = this; 
     }
 
     public void Start()
@@ -21,12 +21,12 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void NewGame()
     {
-        this.gameDAta = new GameData();
+        this.gameData = new GameData();
     }
 
     public void LoadGame()
     {
-        if (this.gameDAta == null) {
+        if (this.gameData == null) {
             Debug.Log("iNITIALIZING DATA TO DEFAULTS");
             NewGame();
         }
@@ -36,7 +36,7 @@ public class DataPersistanceManager : MonoBehaviour
     {
             
     }
-    public void onGameExit()
+    public void onApplicationQuit()
     {
         saveGame();
     }
