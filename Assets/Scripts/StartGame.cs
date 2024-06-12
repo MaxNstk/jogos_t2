@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartGame : MonoBehaviour
+public class StartGame : MonoBehaviour, IDataPersistence
 {
+
+    // 0 StartGame
+    // 1 InformarNome
+    // 2 Ranking
+    // Jogo
+    // EndGame
+
     public void ReiniciarJogo()
     {
         SceneManager.LoadScene(1);
@@ -12,16 +19,26 @@ public class StartGame : MonoBehaviour
 
     public void CarregarJogo()
     {
-        // TODO carregar save
+        SceneManager.LoadScene(0);
     }
 
     public void Ranking()
     {
-        // TODO RANKING
+        SceneManager.LoadScene(2);
     }
 
     public void SairJogo()
     {
         Application.Quit();
+    }
+
+    public void LoadData(GameData data)
+    {
+        Debug.Log("loading data");
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        Debug.Log("saving data");
     }
 }

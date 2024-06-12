@@ -5,10 +5,17 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public bool hasReachedSavePoint;
+    public bool hasReachedSavePoint1;
+    public bool hasReachedSavePoint2;
+
+    public List<PlayerScore> scoreList;
+    public PlayerScore currentScore;
 
     public GameData()
     {
-        hasReachedSavePoint = false;
+        hasReachedSavePoint1 = false;
+        hasReachedSavePoint2 = false;
+        scoreList = new List<PlayerScore>();
+        currentScore = new PlayerScore();
     }
 }
