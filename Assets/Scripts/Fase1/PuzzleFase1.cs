@@ -3,11 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class PuzzleFase1 : MonoBehaviour
+public class PuzzleFase1 : MonoBehaviour, IDataPersistence
 {
 
     public int totalButtons;
     public int foundButtons = 0;
+
+    private bool phaseCompleted = false; 
 
     public GameObject portaAbrir; 
 
@@ -33,6 +35,7 @@ public class PuzzleFase1 : MonoBehaviour
 
     public void UpdateFindableObject()
     {
+        DataPersistanceManager.instance.saveGame();
         {
             buttons = FindObjectsOfType<FindableButton>();
             updateScore();
@@ -44,13 +47,28 @@ public class PuzzleFase1 : MonoBehaviour
                     return;
                 }
             }
-            portaAbrir.GetComponent<Door>().Destrancar();
-            AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
-            am.PlayClip(am.successClip);
-
+            PhaseCompleted();
         }
-
-
     }
 
+    public void PhaseCompleted()
+    {
+        phaseCompleted = true;
+
+        portaAbrir.GetComponent<Door>().Destrancar();
+        AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
+        am.PlayClip(am.successClip);
+
+        DataPersistanceManager.instance.saveGame();
+    }
+    public void LoadData(GameData data)
+    {
+       //TODO fase 1 completa
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.hasPassedPhase1 = phaseCompleted;
+        data.currentPlayerTime = GameController.instance.timeTaken;
+    }
 }

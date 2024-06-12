@@ -8,7 +8,7 @@ public class DataPersistanceManager : MonoBehaviour
 {
     [Header("File Storage Config")]
 
-    [SerializeField] private string fileName;
+    [SerializeField] private string fileName = "data.json";
 
     public static DataPersistanceManager instance {  get; private set; }
     private GameData gameData;

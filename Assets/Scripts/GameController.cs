@@ -10,6 +10,13 @@ public class GameController : MonoBehaviour
     private bool gameFinished = false;
     public float timeTaken;
 
+    public static GameController instance { get; private set; }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         // Record the start time when the game starts

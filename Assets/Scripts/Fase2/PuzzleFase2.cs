@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PuzzleFase2 : MonoBehaviour
+public class PuzzleFase2 : MonoBehaviour, IDataPersistence
 {
     public List<AudioClip> clips;
     public AudioClip nextStageClip;
@@ -15,6 +15,8 @@ public class PuzzleFase2 : MonoBehaviour
 
     public int currentPhase = 1;
     public int phasesAmount = 10;
+
+    private bool phaseCompleted = false;
 
     AudioManagerScript am;
 
@@ -86,6 +88,7 @@ public class PuzzleFase2 : MonoBehaviour
 
     internal void clipPlayed(AudioClip clip)
     {
+        DataPersistanceManager.instance.saveGame();
         if (!this.onGoing) { return; }
         StartCoroutine(HandleClipPlayed(clip));
     }
@@ -130,7 +133,7 @@ public class PuzzleFase2 : MonoBehaviour
         am.PlayClip(am.successClip);
         this.onGoing = false;
         gameEnd = true;
-
+        DataPersistanceManager.instance.saveGame();
     }
 
     IEnumerator WaitSeconds(int seconds)
@@ -140,5 +143,16 @@ public class PuzzleFase2 : MonoBehaviour
 
     void Update()
     {
+    }
+
+    public void LoadData(GameData data)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.hasPassedPhase2 = gameEnd;
+        data.currentPlayerTime = GameController.instance.timeTaken;
     }
 }
