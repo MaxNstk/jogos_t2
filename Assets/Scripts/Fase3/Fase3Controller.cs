@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Fase3Controller : MonoBehaviour
+public class Fase3Controller : MonoBehaviour, IDataPersistence
 {
     public AudioClip succesClip;
 
@@ -19,6 +20,7 @@ public class Fase3Controller : MonoBehaviour
     int errorLimit = 3;
 
     bool onGoing = false;
+    bool gameEnd = false;
 
     void Update()
     {
@@ -85,9 +87,15 @@ public class Fase3Controller : MonoBehaviour
 
     private void EndGame()
     {
+        gameEnd = true;
         am.PlayClipWaiting(succesClip);
         Debug.Log("Parabéns acertasse tudo");
         onGoing = false;
+
+        DataPersistanceManager.instance.saveGame();
+
+        SceneManager.LoadScene(5);
+
     }
 
     private void GoToCheckPoint()
@@ -101,4 +109,20 @@ public class Fase3Controller : MonoBehaviour
         return currentPlayerSequence[currentPlayerSequence.Count - 1] == clipSequence[currentPlayerSequence.Count - 1];
     }
 
+    public void LoadData(GameData data)
+    {
+        //todo
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.currentPlayerTime = GameController.instance.timeTaken;
+        if (gameEnd)
+        {
+            data.playerNames.Add(data.currentPlayerName);
+            data.playertimes.Add(data.currentPlayerTime);
+            data.currentPlayerTime = 0;
+            data.currentPlayerName = null;
+        }
+    }
 }

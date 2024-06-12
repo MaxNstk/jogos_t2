@@ -16,8 +16,6 @@ public class PuzzleFase2 : MonoBehaviour, IDataPersistence
     public int currentPhase = 1;
     public int phasesAmount = 10;
 
-    private bool phaseCompleted = false;
-
     AudioManagerScript am;
 
     bool onGoing = false;
@@ -147,7 +145,7 @@ public class PuzzleFase2 : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        throw new NotImplementedException();
+        //TODO se a fase 2 estiver completa loadar a partir da fase 3
     }
 
     public void SaveData(GameData data)

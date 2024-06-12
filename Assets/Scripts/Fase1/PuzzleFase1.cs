@@ -63,7 +63,7 @@ public class PuzzleFase1 : MonoBehaviour, IDataPersistence
     }
     public void LoadData(GameData data)
     {
-       //TODO fase 1 completa
+       //TODO fase 1 completa loadar a partir da fase 2
     }
 
     public void SaveData(GameData data)
