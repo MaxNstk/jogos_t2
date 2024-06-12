@@ -12,12 +12,17 @@ public class StartGame : MonoBehaviour
 
     public void CarregarJogo()
     {
-        // TODO carregar save
+        SceneManager.LoadScene(4);
     }
 
     public void Ranking()
     {
-        // TODO RANKING
+        SceneManager.LoadScene(2);
+    }
+
+    public void Sobre()
+    {
+        SceneManager.LoadScene(3);
     }
 
     public void SairJogo()
