@@ -13,6 +13,9 @@ public class DataLoader : MonoBehaviour, IDataPersistence
     {
         if (!data.needsToBeContinued) { return; }
 
+        GetComponent<GameController>().timeTaken = data.currentPlayerTime;
+
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         CharacterController characterController = player.GetComponent<CharacterController>();
         MovimentarPersonagem personagem = player.GetComponent<MovimentarPersonagem>();
