@@ -11,12 +11,19 @@ public class PuzzleFase1 : MonoBehaviour, IDataPersistence
 
     private bool phaseCompleted = false;
 
-    public GameObject portaAbrir; 
+    public GameObject portaAbrir;
 
+    private Image imagemVisao;
     private FindableButton[] buttons;
 
     void Start()
     {
+        GameObject painelVisao = GameObject.FindGameObjectWithTag("Visao");
+        if (painelVisao != null)
+        {
+            imagemVisao = painelVisao.GetComponent<Image>();
+        }
+
         buttons = FindObjectsOfType<FindableButton>();
         totalButtons = buttons.Length;
         UpdateFindableObject();
@@ -56,12 +63,20 @@ public class PuzzleFase1 : MonoBehaviour, IDataPersistence
     {
         phaseCompleted = true;
 
+        if (imagemVisao != null)
+        {
+            Color color = imagemVisao.color;
+            color.a = 0f;
+            imagemVisao.color = color;
+        }
+
         portaAbrir.GetComponent<Door>().Destrancar();
         AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
         am.PlayClip(am.successClip);
 
         DataPersistanceManager.instance.saveGame();
     }
+
     public void LoadData(GameData data)
     {
        //TODO fase 1 completa loadar a partir da fase 2
