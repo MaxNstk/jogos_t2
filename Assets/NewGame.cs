@@ -25,6 +25,7 @@ public class NewGame : MonoBehaviour, IDataPersistence
     
     public void StartNewGame()
     {
+        DataPersistanceManager.instance.NewGame();  
         playerName = GameObject.Find("TextoNome").GetComponent<Text>().text;
         DataPersistanceManager.instance.saveGame();
         // TODO SALVAR

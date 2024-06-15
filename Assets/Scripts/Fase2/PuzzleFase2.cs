@@ -150,6 +150,7 @@ public class PuzzleFase2 : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data)
     {
+        if (!data.hasPassedPhase1) { return; }
         data.hasPassedPhase2 = gameEnd;
         data.currentPlayerTime = GameController.instance.timeTaken;
     }

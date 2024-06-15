@@ -9,7 +9,7 @@ public class PuzzleFase1 : MonoBehaviour, IDataPersistence
     public int totalButtons;
     public int foundButtons = 0;
 
-    private bool phaseCompleted = false; 
+    private bool phaseCompleted = false;
 
     public GameObject portaAbrir; 
 
@@ -35,10 +35,11 @@ public class PuzzleFase1 : MonoBehaviour, IDataPersistence
 
     public void UpdateFindableObject()
     {
-        DataPersistanceManager.instance.saveGame();
         {
             buttons = FindObjectsOfType<FindableButton>();
             updateScore();
+
+            DataPersistanceManager.instance.saveGame();
 
             foreach (FindableButton button in buttons)
             {

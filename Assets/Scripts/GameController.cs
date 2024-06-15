@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     private bool gameFinished = false;
     public float timeTaken;
 
+    private Text timeText;
+
     public static GameController instance { get; private set; }
 
     private void Awake()
@@ -21,6 +23,8 @@ public class GameController : MonoBehaviour
     {
         // Record the start time when the game starts
         startTime = Time.time;
+        timeText = GameObject.Find("TempoDecorrido").GetComponent<Text>();
+
     }
 
     void Update()
@@ -31,7 +35,7 @@ public class GameController : MonoBehaviour
             // Update the time taken continuously until the game is finished
             timeTaken += Time.deltaTime;
             string text = $"Tempo decorrido: {timeTaken}";
-            GameObject.Find("TempoDecorrido").GetComponent<Text>().text = text;
+            timeText.text = text;
         }
     }
 
