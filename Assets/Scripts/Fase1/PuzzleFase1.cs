@@ -1,4 +1,5 @@
 using SunTemple;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,13 +57,20 @@ public class PuzzleFase1 : MonoBehaviour, IDataPersistence
                 }
             }
             PhaseCompleted();
+            DataPersistanceManager.instance.saveGame();
+
         }
     }
 
     public void PhaseCompleted()
     {
         phaseCompleted = true;
+        foundButtons = FindObjectsOfType<FindableButton>().Count();
 
+        foreach (FindableButton button in FindObjectsOfType<FindableButton>())
+        {
+            button.Kill();
+        }
         if (imagemVisao != null)
         {
             Color color = imagemVisao.color;
@@ -71,10 +79,15 @@ public class PuzzleFase1 : MonoBehaviour, IDataPersistence
         }
 
         portaAbrir.GetComponent<Door>().Destrancar();
-        AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
-        am.PlayClip(am.successClip);
+        try
+        {
+            AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
+            am.PlayClip(am.successClip);
+        }
+        catch
+        {
 
-        DataPersistanceManager.instance.saveGame();
+        }
     }
 
     public void LoadData(GameData data)

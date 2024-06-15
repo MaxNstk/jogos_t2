@@ -112,6 +112,7 @@ public class PuzzleFase2 : MonoBehaviour, IDataPersistence
             if (this.currentPhase == this.phasesAmount)
             {
                 EndGame();
+                DataPersistanceManager.instance.saveGame();
                 yield break;
             }
             yield return StartCoroutine(WaitSeconds(1));
@@ -124,14 +125,13 @@ public class PuzzleFase2 : MonoBehaviour, IDataPersistence
         }
     }
 
-    void EndGame()
+    public void EndGame()
     {
         endPhaseDoor.GetComponent<Door>().Destrancar();
         AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
         am.PlayClip(am.successClip);
         this.onGoing = false;
         gameEnd = true;
-        DataPersistanceManager.instance.saveGame();
     }
 
     IEnumerator WaitSeconds(int seconds)

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartGame : MonoBehaviour
+public class StartGame : MonoBehaviour, IDataPersistence
 {
+    public bool continueGame = false;
     public void ReiniciarJogo()
     {
         SceneManager.LoadScene(1);
@@ -12,6 +13,8 @@ public class StartGame : MonoBehaviour
 
     public void CarregarJogo()
     {
+        continueGame = true;
+        DataPersistanceManager.instance.saveGame();
         SceneManager.LoadScene(4);
     }
 
@@ -28,5 +31,15 @@ public class StartGame : MonoBehaviour
     public void SairJogo()
     {
         Application.Quit();
+    }
+
+    public void LoadData(GameData data)
+    {
+        //
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.needsToBeContinued = continueGame;
     }
 }

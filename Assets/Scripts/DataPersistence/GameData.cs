@@ -14,11 +14,14 @@ public class GameData
     public List<string> playerNames;
     public List<float> playertimes;
 
+    public bool needsToBeContinued; 
+
 
     public GameData()
     {
         hasPassedPhase1 = false;
         hasPassedPhase2 = false;
+        needsToBeContinued = false;
 
         currentPlayerName = "";
         currentPlayerTime = 0;

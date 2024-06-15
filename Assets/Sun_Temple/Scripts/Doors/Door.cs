@@ -33,10 +33,16 @@ namespace SunTemple
 
 		public void Destrancar()
 		{
-            AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
-            am.PlayClip(am.unlockDoorClip);
             this.IsLocked = false;
-			GetComponent<Outline>().OutlineWidth = 3f;
+			try {
+                AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
+                am.PlayClip(am.unlockDoorClip);
+
+                GetComponent<Outline>().OutlineWidth = 3f;
+            } catch
+			{
+
+			}
 		}
 
         void Start(){

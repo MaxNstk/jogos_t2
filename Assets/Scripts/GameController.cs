@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
         // Record the start time when the game starts
         startTime = Time.time;
         timeText = GameObject.Find("TempoDecorrido").GetComponent<Text>();
-
+        DataPersistanceManager.instance.saveGame();
     }
 
     void Update()

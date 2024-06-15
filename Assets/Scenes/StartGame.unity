@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1310,6 +1310,7 @@ GameObject:
   - component: {fileID: 1614672869}
   - component: {fileID: 1614672872}
   - component: {fileID: 1614672873}
+  - component: {fileID: 1614672874}
   m_Layer: 5
   m_Name: StartJogo
   m_TagString: Untagged
@@ -1349,6 +1350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69504a4b1327bca48be071159c60f8ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  continueGame: 0
 --- !u!222 &1614672871
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1480,6 +1482,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1614672874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614672867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc40b074dadef047b2ef4041bf82800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: data.json
 --- !u!1 &1705436004
 GameObject:
   m_ObjectHideFlags: 0

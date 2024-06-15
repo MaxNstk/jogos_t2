@@ -13,13 +13,18 @@ public class FindableButton : MonoBehaviour, IPegavel
         PuzzleFase1 controller = FindObjectOfType<PuzzleFase1>();
         controller.foundButtons++;
         controller.UpdateFindableObject();
-        Destroy(gameObject); 
+        Kill();
     }
 
     internal void setActive()
     {
         this.gameObject.tag = "Pegar";
         GetComponent<AudioSource>().Play();
+    }
+
+    public void Kill()
+    {      
+        Destroy(gameObject); 
     }
 
     // Start is called before the first frame update
