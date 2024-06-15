@@ -116,7 +116,7 @@ public class Fase3Controller : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data)
     {
-        if (!data.hasPassedPhase2) { return; }
+        //if (!data.hasPassedPhase2) { return; }
 
         data.currentPlayerTime = GameController.instance.timeTaken;
         if (gameEnd)

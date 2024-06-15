@@ -46,11 +46,7 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void saveGame()
     {
-        if (this.gameData == null)
-        {
-            LoadGame();
-        }
-
+        LoadGame();
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
             dataPersistenceObj.SaveData(gameData);

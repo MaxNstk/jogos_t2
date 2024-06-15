@@ -458,7 +458,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1614672869}
         m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
-        m_MethodName: ReiniciarJogo
+        m_MethodName: Sobre
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -803,7 +803,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1614672869}
         m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
-        m_MethodName: Sobre
+        m_MethodName: Ranking
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

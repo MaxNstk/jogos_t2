@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 191274972}
   - component: {fileID: 191274971}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: TextoPlacar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,14 +279,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Autores:\nMax Natanael Starke - max.starke2002@edu.udesc.br\nJo\xE3o Eduardo
-    Krieger -emailjo\xE3o"
+  m_Text: 
 --- !u!222 &191274972
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -690,6 +689,8 @@ GameObject:
   - component: {fileID: 1614672872}
   - component: {fileID: 1614672873}
   - component: {fileID: 1614672874}
+  - component: {fileID: 1614672876}
+  - component: {fileID: 1614672875}
   m_Layer: 5
   m_Name: StartJogo
   m_TagString: Untagged
@@ -860,6 +861,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd78d941912f7a4e8fd25394cbc5ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1614672875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614672867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db12eaf7fa56cd14cb2dea36b569153b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1614672876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614672867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc40b074dadef047b2ef4041bf82800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: data.json
 --- !u!1 &1705436004
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +960,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1765753553}
   m_Layer: 5
-  m_Name: Texto
+  m_Name: aaa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
