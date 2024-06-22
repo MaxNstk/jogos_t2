@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class StartGame : MonoBehaviour, IDataPersistence
 {
     public bool continueGame = false;
+    public bool hasSomeonePlaying = false;
     public void ReiniciarJogo()
     {
         SceneManager.LoadScene(1);
@@ -13,6 +14,10 @@ public class StartGame : MonoBehaviour, IDataPersistence
 
     public void CarregarJogo()
     {
+        DataPersistanceManager.instance.LoadGame();
+
+        if (!hasSomeonePlaying) { return; }
+
         continueGame = true;
         DataPersistanceManager.instance.saveGame();
         SceneManager.LoadScene(4);
@@ -35,7 +40,7 @@ public class StartGame : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        //
+        hasSomeonePlaying = data.currentPlayerName != "";
     }
 
     public void SaveData(GameData data)

@@ -48,6 +48,12 @@ public class FileDataHandler
     {
 
         // use Path.Combine to account for different OS's having different path separators
+        if (data.playerNames.Count == 0)
+        {
+            GameData savedData= Load();
+            data.playerNames = savedData.playerNames;  
+            data.playertimes = savedData.playertimes;
+        }
         string fullPath = Path.Combine(dataDirPath, dataFileName);
         try
         {

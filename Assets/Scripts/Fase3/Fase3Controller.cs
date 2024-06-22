@@ -123,8 +123,11 @@ public class Fase3Controller : MonoBehaviour, IDataPersistence
         {
             data.playerNames.Add(data.currentPlayerName);
             data.playertimes.Add(data.currentPlayerTime);
+            data.currentPlayerName = "";
             data.currentPlayerTime = 0;
-            data.currentPlayerName = null;
+            data.hasPassedPhase1 = false;
+            data.hasPassedPhase2 = false;
+            data.needsToBeContinued = false;
         }
     }
 }
