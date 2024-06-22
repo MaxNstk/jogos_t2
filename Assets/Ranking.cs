@@ -10,13 +10,27 @@ public class Ranking : MonoBehaviour, IDataPersistence
     {
         Text texto = GameObject.Find("TextoPlacar").GetComponent<Text>();
 
-        texto.text = "Nome do jogador - Tempo decorrido"+"\n";
+        texto.text = "Nome do jogador - Tempo decorrido" + "\n";
 
-        for (int i=0;i<data.playerNames.Count; i++)
+        // Combine playerNames and playertimes into a list of tuples
+        List<(string playerName, float playerTime)> playerData = new List<(string, float)>();
+
+        for (int i = 0; i < data.playerNames.Count; i++)
         {
-            texto.text = texto.text + "\n" +
-                $"{data.playerNames[i]} - {data.playertimes[i]}";
-        }   
+            playerData.Add((data.playerNames[i], data.playertimes[i]));
+        }
+
+        // Sort the playerData list based on playerTime (ascending)
+        playerData.Sort((a, b) => a.playerTime.CompareTo(b.playerTime));
+
+        // Clear the text
+        texto.text = "";
+
+        // Generate the sorted text
+        foreach (var player in playerData)
+        {
+            texto.text += $"{player.playerName} - {player.playerTime}\n";
+        }
     }
 
     public void SaveData(GameData data)
