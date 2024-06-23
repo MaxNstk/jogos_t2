@@ -23,8 +23,9 @@ public class Tutorial : MonoBehaviour
         {
             audioSource.Play();
             imagem.gameObject.SetActive(!imagem.gameObject.activeSelf);
-            cursor.SetActive(!imagem.gameObject.activeSelf);
         }
+
+        cursor.SetActive(!imagem.gameObject.activeSelf);
     }
 
     public void SetFase(int novaFase)
