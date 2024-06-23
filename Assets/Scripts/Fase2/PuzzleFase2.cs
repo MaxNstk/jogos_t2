@@ -133,7 +133,7 @@ public class PuzzleFase2 : MonoBehaviour, IDataPersistence
 
         GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
         Tutorial tutorial = canvas.GetComponent<Tutorial>();
-        tutorial.SetFase(2);
+        tutorial.SetFase(3);
 
         this.onGoing = false;
         gameEnd = true;
