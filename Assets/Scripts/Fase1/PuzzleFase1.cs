@@ -78,6 +78,10 @@ public class PuzzleFase1 : MonoBehaviour, IDataPersistence
             imagemVisao.color = color;
         }
 
+        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+        Tutorial tutorial = canvas.GetComponent<Tutorial>();
+        tutorial.SetFase(2);
+
         portaAbrir.GetComponent<Door>().Destrancar();
         try
         {

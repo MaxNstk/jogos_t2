@@ -130,6 +130,11 @@ public class PuzzleFase2 : MonoBehaviour, IDataPersistence
         endPhaseDoor.GetComponent<Door>().Destrancar();
         AudioManagerScript am = FindObjectOfType<AudioManagerScript>();
         am.PlayClip(am.successClip);
+
+        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+        Tutorial tutorial = canvas.GetComponent<Tutorial>();
+        tutorial.SetFase(2);
+
         this.onGoing = false;
         gameEnd = true;
     }
