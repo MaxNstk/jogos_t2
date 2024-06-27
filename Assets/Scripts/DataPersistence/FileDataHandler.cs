@@ -51,8 +51,12 @@ public class FileDataHandler
         if (data.playerNames.Count == 0)
         {
             GameData savedData= Load();
-            data.playerNames = savedData.playerNames;  
-            data.playertimes = savedData.playertimes;
+            if (savedData != null)
+            {
+                data.playerNames = savedData.playerNames;
+                data.playertimes = savedData.playertimes;
+            }
+            
         }
         string fullPath = Path.Combine(dataDirPath, dataFileName);
         try
